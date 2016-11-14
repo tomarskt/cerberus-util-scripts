@@ -1,0 +1,63 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "ami_name": "cerberus-consul-{{timestamp}}",
+    "region": "us-west-2",
+    "source_ami": null,
+    "vpc_id": null,
+    "subnet_id": null
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "vpc_id": "{{user `vpc_id`}}",
+    "subnet_id": "{{user `subnet_id`}}",
+    "region": "{{user `region`}}",
+    "source_ami": "{{user `source_ami`}}",
+    "instance_type": "t2.micro",
+    "ssh_pty": true,
+    "ssh_timeout": "5m",
+    "ssh_username": "ubuntu",
+    "ami_name": "{{user `ami_name`}}"
+  }],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "echo -n 'Waiting for cloud-init'",
+        "while [ -n \"$(ps -A | grep cloud-init)\" ]",
+        "  do echo -n . ; sleep 1; done",
+        "echo ' cloud-init finished.'",
+        "",
+        "sudo mkdir -p /justin/was/here",
+        "sudo mkdir -p /opt/puppet/modules",
+        "sudo chown -R {{user `ssh_username`}}:{{user `ssh_username`}} /opt/puppet"
+      ]
+    },
+    {
+      "type": "shell",
+      "script": "bash_scripts/packer-setup-script.sh"
+    },
+    {
+      "type"      : "file",
+      "source"    : "consul/Puppetfile",
+      "destination": "/tmp/Puppetfile"
+    }, {
+      "type"  : "shell",
+      "inline": [
+        "sudo mkdir -p -m600 /opt/puppet/modules",
+        "sudo chown -R ubuntu:ubuntu /opt/puppet",
+        "sudo cp /tmp/Puppetfile /opt/puppet",
+        "cd /opt/puppet; sudo librarian-puppet install --verbose ",
+        "sudo chown -R ubuntu:ubuntu /opt/puppet"
+      ]
+    }, {
+      "type"              : "puppet-masterless",
+      "manifest_file"     : "consul/manifest.pp",
+      "staging_directory" : "/tmp",
+      "execute_command"   : "{{.FacterVars}}{{if .Sudo}} sudo -E {{end}}puppet apply --verbose --detailed-exitcodes --modulepath='/opt/puppet/modules' {{.ManifestFile}}"
+    }
+  ]
+}
