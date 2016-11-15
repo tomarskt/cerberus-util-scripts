@@ -6,8 +6,10 @@ This repository contains the scripts needed to bake to various AMIs that compose
 
 To build the Cerberus AMIs we need to set the following environmental variables
 
-- AWS_ACCESS_KEY=[ACCESS KEY FOR IAM USER]
-- AWS_SECRET_ACCESS_KEY=[SECRET ACCESS KEY FOR IAM USER]
+- AWS_ACCESS_KEY=[AWS Access Key for user or role]
+- AWS_SECRET_ACCESS_KEY=[AWS Secret Access Key for user or role]
+
+if you are using temp credentials you can modify the packer files to have the temp token
 
 For OSS testing I used the [Ubuntu 14.04 LTS us-west-2 hvm:ebs-ssd base image](https://cloud-images.ubuntu.com/locator/ec2/)
 

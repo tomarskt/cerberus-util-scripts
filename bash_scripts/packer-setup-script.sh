@@ -27,5 +27,5 @@ sudo apt-get -y install unzip
 
 # trusty librarian-puppet to old, use gem
 sudo gem install --no-rdoc --no-ri bundler
-sudo gem install --no-rdoc --no-ri json -v 1.8.3
-sudo gem install --no-rdoc --no-ri librarian-puppet -v 1.0.3
+sudo gem install --no-rdoc --no-ri json
+sudo gem install --no-rdoc --no-ri librarian-puppet
