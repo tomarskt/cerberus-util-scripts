@@ -20,7 +20,12 @@
     "ssh_pty": true,
     "ssh_timeout": "5m",
     "ssh_username": "ubuntu",
-    "ami_name": "cerberus-{{user `cerberus_component`}}-{{timestamp}}"
+    "ami_name": "cerberus-{{user `cerberus_component`}}-{{timestamp}}",
+    "tags" : {
+      "base_ami"   : "{{user `source_ami`}}",
+      "cerberus_component" : "{{user `cerberus_component`}}",
+      "ami_creation_time": "{{timestamp}}"
+    }
   }],
   "provisioners": [
     {
