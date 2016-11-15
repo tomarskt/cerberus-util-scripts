@@ -13,7 +13,7 @@ Released on 2016-11-09.
 ### Added
 
 - Initial open source code drop for the Cerberus Utility Scripts.
-	- Added by [Justin FIeld][contrib_fieldju_tibrim].
-	
+    - Added by [Justin Field][contrib_fieldju].
+
 
 [contrib_fieldju]: https://github.com/fieldju

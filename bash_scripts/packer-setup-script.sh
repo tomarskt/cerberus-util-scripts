@@ -22,6 +22,9 @@ sudo apt-get -y install python-pip
 echo 'installing aws cli'
 sudo pip install awscli --ignore-installed six
 
+echo 'installing unzip'
+sudo apt-get -y install unzip
+
 # trusty librarian-puppet to old, use gem
 sudo gem install --no-rdoc --no-ri bundler
 sudo gem install --no-rdoc --no-ri json -v 1.8.3
