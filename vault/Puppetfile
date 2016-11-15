@@ -6,7 +6,7 @@ forge "https://forgeapi.puppetlabs.com"
 mod 'puppetlabs-stdlib', '>= 3.0.0'
 
 mod 'nike/vault',
-  :git => 'https://github.com/fieldju/cerberus-vault-puppet-module.git'
+  :git => 'https://github.com/nike-inc/cerberus-vault-puppet-module.git'
 
 mod 'nike/consul',
-  :git => 'https://github.com/fieldju/cerberus-consul-puppet-module.git'
+  :git => 'https://github.com/nike-inc/cerberus-consul-puppet-module.git'

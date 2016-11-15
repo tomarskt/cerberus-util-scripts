@@ -4,4 +4,4 @@
 forge "https://forgeapi.puppetlabs.com"
 
 mod 'nike/gateway',
-  :git => 'https://github.com/fieldju/cerberus-gateway-puppet-module.git'
+  :git => 'https://github.com/nike-inc/cerberus-gateway-puppet-module.git'
