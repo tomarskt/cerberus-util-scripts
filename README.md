@@ -12,33 +12,17 @@ To build the Cerberus AMIs we need to set the following environmental variables
 if you are using temp credentials you can modify the packer files to have the temp token
 
 For OSS testing I used the [Ubuntu 14.04 LTS us-west-2 hvm:ebs-ssd base image](https://cloud-images.ubuntu.com/locator/ec2/)
+Currently our Puppet modules and packer scripts are written for Ubuntu 14.04, we plan on migrating everything to 16.04.
+Hopefully all that is needed to support 16.04 is porting the startup scripts from Upstart to systemd.
 
-### Cerberus Management Service
+Also the packer in this project currently makes use of apt-get, if we port the bash to puppet completely we would probably be able to support more distros
 
-    packer build \
-    -var 'source_ami=ami-34913254' \
-    -var 'vpc_id=vpc-6e768f09' \
-    -var 'subnet_id=subnet-282d4670' \
-    -var 'cerberus_component=cms' \
-    cms/packer.json
+Internally at Nike we do not use the image straight from canonical like this read me suggests you can for getting started.
+ 
+We create our own base ami that configures things like New Relic and Splunk and extra packages for security.
+For this project we distilled the essence of what you need for our Cerberus Puppet modules into the packer script.
 
-### Gateway
-
-    packer build \
-    -var 'source_ami=ami-34913254' \
-    -var 'vpc_id=vpc-6e768f09' \
-    -var 'subnet_id=subnet-282d4670' \
-    -var 'cerberus_component=gateway' \
-    packer.json
-
-### Vault
-
-    packer build \
-    -var 'source_ami=ami-34913254' \
-    -var 'vpc_id=vpc-6e768f09' \
-    -var 'subnet_id=subnet-282d4670' \
-    -var 'cerberus_component=vault' \
-    packer.json
+To create the images for the various Cerberus components please run the following commands from the root of this project.
 
 ### Consul
 
@@ -48,3 +32,30 @@ For OSS testing I used the [Ubuntu 14.04 LTS us-west-2 hvm:ebs-ssd base image](h
     -var 'subnet_id=subnet-282d4670' \
     -var 'cerberus_component=consul' \
     packer.json
+
+### Vault
+
+    packer build \
+    -var 'source_ami=ami-34913254' \
+    -var 'vpc_id=vpc-6e768f09' \
+    -var 'subnet_id=subnet-282d4670' \
+    -var 'cerberus_component=vault' \
+    packer.json  
+      
+### Gateway
+
+    packer build \
+    -var 'source_ami=ami-34913254' \
+    -var 'vpc_id=vpc-6e768f09' \
+    -var 'subnet_id=subnet-282d4670' \
+    -var 'cerberus_component=gateway' \
+    packer.json
+    
+### Cerberus Management Service
+
+    packer build \
+    -var 'source_ami=ami-34913254' \
+    -var 'vpc_id=vpc-6e768f09' \
+    -var 'subnet_id=subnet-282d4670' \
+    -var 'cms_jar_url=https://github.com/Nike-Inc/cerberus-management-service/releases/download/v1.0.0/cms.jar' \
+    cms-packer.json

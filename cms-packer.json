@@ -1,6 +1,6 @@
 {
   "variables": {
-    "cerberus_component": null,
+    "cms_jar_url": null,
     "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
     "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
     "region": "us-west-2",
@@ -20,13 +20,13 @@
     "ssh_pty": true,
     "ssh_timeout": "5m",
     "ssh_username": "ubuntu",
-    "ami_name": "cerberus-{{user `cerberus_component`}}-{{timestamp}}",
+    "ami_name": "cerberus-cms-{{timestamp}}",
     "tags" : {
       "base_ami"   : "{{user `source_ami`}}",
-      "cerberus_component" : "{{user `cerberus_component`}}",
+      "cerberus_component" : "cms",
       "ami_creation_time": "{{timestamp}}"
     },
-    "name": "{{user `cerberus_component`}}"
+    "name": "cms"
   }],
   "provisioners": [
     {
@@ -46,14 +46,40 @@
       "script": "bash_scripts/packer-setup-script.sh"
     },
     {
+      "type": "shell",
+      "script": "bash_scripts/setup-oracle-java8.sh"
+    },
+    {
       "type"      : "file",
-      "source"    : "cerberus_components/{{user `cerberus_component`}}/Puppetfile",
+      "source"    : "cerberus_components/cms/Puppetfile",
       "destination": "/tmp/Puppetfile"
     },{
       "type"      : "file",
       "source"    : "upstart/ec2_user_data.conf",
       "destination": "/tmp/ec2_user_data.conf"
-    }, {
+    },
+    {
+      "type" : "file",
+      "source" : "bash_scripts/cms-init-script.sh",
+      "destination" : "/tmp/init-script.sh"
+    },
+    {
+      "type" : "file",
+      "source" : "bash_scripts/jvm-behavior-args.sh",
+      "destination" : "/tmp/jvm-behavior-args.sh"
+    },
+    {
+      "type" : "file",
+      "source" : "bash_scripts/start-jar-script.sh",
+      "destination" : "/tmp/start-jar-script.sh"
+    },
+    {
+      "type" : "shell",
+      "inline": [
+        "wget {{user `cms_jar_url`}} -O /tmp/app-server.jar"
+      ]
+    },
+    {
       "type"  : "shell",
       "inline": [
         "sudo mkdir -p -m600 /opt/puppet/modules",
@@ -65,9 +91,10 @@
         "sudo chown root:root /etc/init/ec2_user_data.conf",
         "sudo chmod 0644 /etc/init/ec2_user_data.conf"
       ]
-    }, {
+    },
+    {
       "type"              : "puppet-masterless",
-      "manifest_file"     : "cerberus_components/{{user `cerberus_component`}}/manifest.pp",
+      "manifest_file"     : "cerberus_components/cms/manifest.pp",
       "staging_directory" : "/tmp",
       "execute_command"   : "{{.FacterVars}}{{if .Sudo}} sudo -E {{end}}puppet apply --verbose --detailed-exitcodes --modulepath='/opt/puppet/modules' {{.ManifestFile}}"
     }
