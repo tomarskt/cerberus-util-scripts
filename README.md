@@ -17,11 +17,13 @@ Hopefully all that is needed to support 16.04 is porting the startup scripts fro
 
 Also the packer in this project currently makes use of apt-get, if we port the bash to puppet completely we would probably be able to support more distros
 
-Internally at Nike we do not use the image straight from canonical like this read me suggests you can for getting started.
+### NOTE
+Internally at Nike we do not use the image straight from canonical like this README suggests you can for getting started.
  
 We create our own base ami that configures things like New Relic and Splunk and extra packages for security.
-For this project we distilled the essence of what you need for our Cerberus Puppet modules into the packer script.
+For this project we distilled the essence of what you need for our Cerberus Puppet modules into the packer scripts.
 
+### Bake the AMIs
 To create the images for the various Cerberus components please run the following commands from the root of this project.
 
 ### Consul
