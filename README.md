@@ -4,7 +4,7 @@ This repository contains the scripts needed to bake to various AMIs that compose
 
 ## Requirements
 
-Install [Packer](http:packer.io/doc/installation.html) appropriate for your Operating System.
+Install [Packer](https://www.packer.io/docs/installation.html)
 
 ## AMIs
 
