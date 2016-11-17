@@ -2,6 +2,10 @@
 
 This repository contains the scripts needed to bake to various AMIs that compose a Cerberus environment.
 
+## Requirements
+
+Install [Packer](http:packer.io/doc/installation.html) appropriate for your Operating System.
+
 ## AMIs
 
 To build the Cerberus AMIs we need to set the following environmental variables
@@ -19,7 +23,7 @@ Also the packer in this project currently makes use of apt-get, if we port the b
 
 ### NOTE
 Internally at Nike we do not use the image straight from canonical like this README suggests you can for getting started.
- 
+
 We create our own base ami that configures things like New Relic and Splunk and extra packages for security.
 For this project we distilled the essence of what you need for our Cerberus Puppet modules into the packer scripts.
 
@@ -43,7 +47,7 @@ To create the images for the various Cerberus components please run the followin
     -var 'subnet_id=subnet-282d4670' \
     -var 'cerberus_component=vault' \
     packer.json  
-      
+
 ### Gateway
 
     packer build \
@@ -52,7 +56,7 @@ To create the images for the various Cerberus components please run the followin
     -var 'subnet_id=subnet-282d4670' \
     -var 'cerberus_component=gateway' \
     packer.json
-    
+
 ### Cerberus Management Service
 
     packer build \
