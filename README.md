@@ -25,7 +25,7 @@ Also the packer in this project currently makes use of apt-get, if we port the b
 Internally at Nike we do not use the image straight from canonical. Rather we create our own base ami that configures things like New Relic and Splunk and extra packages for security. We use that Base AMI to apply our custom Puppet Modules on top off.
 
 For this project we distilled the essence of what you need for our Cerberus Puppet modules into these packer scripts.
-You could fork this project and customize or build on top of the image from canonical and base your own base ami to these scripts.
+You could fork this project and customize or build on top of the image from canonical and create your own base ami to use with these scripts.
 
 ### Bake the AMIs
 To create the images for the various Cerberus components please run the following commands from the root of this project.
