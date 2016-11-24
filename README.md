@@ -27,6 +27,8 @@ Internally at Nike we do not use the image straight from canonical. Rather we cr
 For this project we distilled the essence of what you need for our Cerberus Puppet modules into these packer scripts.
 You could fork this project and customize or build on top of the image from canonical and create your own base ami to use with these scripts.
 
+Each component logs to `/var/log/[component]/`.
+
 ### Bake the AMIs
 To create the images for the various Cerberus components please run the following commands from the root of this project.
 You will need the following params for each image.
