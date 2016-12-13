@@ -26,7 +26,7 @@ token. For example, modify the packer json files by adding the two lines highlig
     "cerberus_component": null,
     "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
     "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
-    <b style="background-color: #FF0;">"aws_session_token": "{{env `AWS_SESSION_TOKEN`}}",</b>
+    <b>"aws_session_token": "{{env `AWS_SESSION_TOKEN`}}",</b>
     "region": "us-west-2",
     "source_ami": null,
     "vpc_id": null,
@@ -36,7 +36,7 @@ token. For example, modify the packer json files by adding the two lines highlig
     "type": "amazon-ebs",
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
-    <b style="background-color: #FF0;">"token": "{{ user `aws_session_token`}}",</b>
+    <b>"token": "{{ user `aws_session_token`}}",</b>
     "vpc_id": "{{user `vpc_id`}}",
     "subnet_id": "{{user `subnet_id`}}",
 ...
