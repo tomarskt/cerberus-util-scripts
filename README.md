@@ -140,3 +140,7 @@ token parameter.
 #### Build 'consul' errored: Timeout waiting for SSH.
 
 If you are on a corporate network, SSH might be blocked and you may need to switch to a public network.
+
+#### Misc Error
+
+AWS just fails sometimes, so if you see an error with no explanation try building a second time.
