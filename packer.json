@@ -1,8 +1,9 @@
 {
   "variables": {
-    "cerberus_component": null,
-    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
-    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "cerberus_component": "{{env `CERBERUS_COMPONENT`}}",
+    "ssh_username": "{{env `USER`}}",
+    "ami_description": "",
+    "ami_name": "",
     "region": "us-west-2",
     "source_ami": null,
     "vpc_id": null,
@@ -10,8 +11,6 @@
   },
   "builders": [{
     "type": "amazon-ebs",
-    "access_key": "{{user `aws_access_key`}}",
-    "secret_key": "{{user `aws_secret_key`}}",
     "vpc_id": "{{user `vpc_id`}}",
     "subnet_id": "{{user `subnet_id`}}",
     "region": "{{user `region`}}",
@@ -19,8 +18,9 @@
     "instance_type": "t2.micro",
     "ssh_pty": true,
     "ssh_timeout": "5m",
-    "ssh_username": "ubuntu",
-    "ami_name": "cerberus-{{user `cerberus_component`}}-{{timestamp}}",
+    "ssh_username": "{{user `ssh_username`}}",
+    "ami_description": "{{user `ami_description`}}",
+    "ami_name": "{{user `ami_name`}}",
     "tags" : {
       "base_ami"   : "{{user `source_ami`}}",
       "cerberus_component" : "{{user `cerberus_component`}}",
