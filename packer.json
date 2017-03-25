@@ -7,7 +7,10 @@
     "region": "us-west-2",
     "source_ami": null,
     "vpc_id": null,
-    "subnet_id": null
+    "subnet_id": null,
+    "tag_appversion": "",
+    "tag_creation_time": "{{timestamp}}",
+    "tag_creator": "packer"
   },
   "builders": [{
     "type": "amazon-ebs",
@@ -22,9 +25,11 @@
     "ami_description": "{{user `ami_description`}}",
     "ami_name": "{{user `ami_name`}}",
     "tags" : {
-      "base_ami"   : "{{user `source_ami`}}",
+      "appversion"   : "{{user `tag_appversion`}}",
+      "base_ami"     : "{{user `source_ami`}}",
       "cerberus_component" : "{{user `cerberus_component`}}",
-      "ami_creation_time": "{{timestamp}}"
+      "creation_time": "{{user `tag_creation_time`}}",
+      "creator"      : "{{user `tag_creator`}}"
     },
     "name": "{{user `cerberus_component`}}"
   }],
