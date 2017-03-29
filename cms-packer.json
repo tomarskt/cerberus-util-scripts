@@ -79,6 +79,11 @@
       "destination" : "/tmp/start-jar-script.sh"
     },
     {
+      "type" : "file",
+      "source" : "bash_scripts/cms_signal.conf",
+      "destination" : "/tmp/cms_signal.conf"
+    },
+    {
       "type" : "shell",
       "inline": [
         "wget {{user `cms_jar_url`}} -O /tmp/app-server.jar"

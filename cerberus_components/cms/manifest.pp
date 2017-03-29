@@ -53,6 +53,19 @@ node default {
     require  => File['/opt/cerberus/'],
   }
 
+  package { 'ensure-jq-installed':
+      name    => 'jq',
+      ensure  => installed,
+  }
+
+  file { '/etc/init/cms_signal.conf':
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      source   => "/tmp/cms_signal.conf"
+  }
+
   # Add log rotation for the server's stdout and stderr piped files. These should not grow beyond a few bytes in practice as all the real logs should go to the application's official
   #   log files, but just in case we'll give them a small max size limit to make sure they can't take the box down by filling up the disk.
   file { '/etc/logrotate.d/cms':
