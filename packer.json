@@ -72,7 +72,7 @@
       ]
     }, {
       "type"              : "puppet-masterless",
-      "manifest_file"     : "cerberus_components/{{user `cerberus_component`}}/manifest.pp",
+      "manifest_file"     : "cerberus_components/{{user `cerberus_component`}}",
       "staging_directory" : "/tmp",
       "execute_command"   : "{{.FacterVars}}{{if .Sudo}} sudo -E {{end}}puppet apply --verbose --detailed-exitcodes --modulepath='/opt/puppet/modules' {{.ManifestFile}}"
     }

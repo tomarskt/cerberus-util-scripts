@@ -1,4 +1,4 @@
-node default {
+class cerberus::cms::config {
   # Make sure we have the /opt/cerberus directory for placing the server artifacts/scripts in a known location.
   file { '/opt/cerberus/' :
     ensure   => directory,
