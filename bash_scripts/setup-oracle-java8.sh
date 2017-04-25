@@ -2,7 +2,8 @@
 
 # Download Oracle Java 8 accepting the license
 wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-http://download.oracle.com/otn-pub/java/jdk/8u112-b15/server-jre-8u112-linux-x64.tar.gz
+http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/server-jre-8u131-linux-x64.tar.gz
+
 # Extract the archive
 tar -xzvf server-jre-*.tar.gz
 # clean up the tar
