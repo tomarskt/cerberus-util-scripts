@@ -11,15 +11,6 @@ echo 'apt-get update...'
 # -qq : Please be quiet.
 sudo apt-get -qq -y update
 
-sudo dpkg -l unattended-upgrades 2> /dev/null
-if [ $? -eq 0 ]
-then
-  echo "unattended-upgrades is already installed. Performing updates..."
-  sudo unattended-upgrades
-else
-  echo "WARN: unattended-upgrades is not installed. skipping upgrade"
-fi
-
 echo 'installing build tools...'
 sudo apt-get -y install git build-essential ruby-dev wget lsb-release unzip
 
