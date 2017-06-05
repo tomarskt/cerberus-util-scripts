@@ -82,6 +82,8 @@ packer build \
 -var 'vpc_id=vpc-6e768f09' \
 -var 'subnet_id=subnet-282d4670' \
 -var 'cerberus_component=consul' \
+-var 'ami_name=consul' \
+-var 'ssh_username=ubuntu' \
 packer.json
 ```
 
@@ -93,6 +95,8 @@ packer build \
 -var 'vpc_id=vpc-6e768f09' \
 -var 'subnet_id=subnet-282d4670' \
 -var 'cerberus_component=vault' \
+-var 'ami_name=consul' \
+-var 'ssh_username=ubuntu' \
 packer.json  
 ```
 ### Gateway
@@ -103,6 +107,8 @@ packer build \
 -var 'vpc_id=vpc-6e768f09' \
 -var 'subnet_id=subnet-282d4670' \
 -var 'cerberus_component=gateway' \
+-var 'ami_name=consul' \
+-var 'ssh_username=ubuntu' \
 packer.json
 ```
 
@@ -122,6 +128,8 @@ packer build \
 -var 'vpc_id=vpc-6e768f09' \
 -var 'subnet_id=subnet-282d4670' \
 -var 'cms_jar_url=https://github.com/Nike-Inc/cerberus-management-service/releases/download/v0.7.0/cms.jar' \
+-var 'ami_name=cms' \
+-var 'ssh_username=ubuntu' \
 cms-packer.json
 ```
 
