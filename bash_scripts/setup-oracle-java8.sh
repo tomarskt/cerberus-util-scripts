@@ -4,6 +4,12 @@
 wget -q --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
 http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/server-jre-8u131-linux-x64.tar.gz
 
+if [ ! -f server-jre-*.tar.gz ]
+then 
+  echo "Failed to download Server JRE"
+  exit 1
+fi
+
 # Extract the archive
 tar -xzvf server-jre-*.tar.gz
 # clean up the tar
@@ -16,6 +22,13 @@ sudo mv jdk1.8* /usr/lib/jvm/oracle_jdk8
 # install unlimited strength policy
 wget -q --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
 http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
+
+if [ ! -f jce_policy-8.zip ]
+then 
+  echo "Failed to download Unlimited Strength Policy Jar"
+  exit 1
+fi
+
 unzip jce_policy-8.zip
 mv UnlimitedJCEPolicyJDK8/local_policy.jar /usr/lib/jvm/oracle_jdk8/jre/lib/security/
 mv UnlimitedJCEPolicyJDK8/US_export_policy.jar /usr/lib/jvm/oracle_jdk8/jre/lib/security/
