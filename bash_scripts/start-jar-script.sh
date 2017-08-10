@@ -47,6 +47,12 @@ then
         . /etc/default/jvm-behavior-args
 fi
 
+# The source script to allow for extra JVM behavior parameters in JVM_CUSTOM_ARGS
+if [ -f /etc/default/jvm-custom-args ]
+then
+        . /etc/default/jvm-custom-args
+fi
+
 # Generate the app ID/environment/eureka stuff
 # If the CLOUD_DEV_PHASE environment variable exists then that needs to be used for the environment value, otherwise CLOUD_ENVIRONMENT should be used.
 # This is here to support perf environment clusters when using Asgard.
@@ -67,4 +73,5 @@ LOG_ERR=$LOG_DIR/client.err
 java -jar \
 ${JVM_BEHAVIOR_ARGS} \
 ${APP_ENVIRONMENT_ARGS} \
+${JVM_CUSTOM_ARGS} \
 /opt/cerberus/${CMS}.jar > $LOG_OUT 2> $LOG_ERR & echo $! > $PID_FILE_TO_OUTPUT
