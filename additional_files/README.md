@@ -5,4 +5,5 @@ Management Service (CMS) AMI.
 
 When the Packer JSON file for CMS (`cms-packer.json`) is executed, all files in
 this directory will be uploaded to the `/tmp` directory on the newly baked CMS
-AMI.
+AMI.  These files can then be used to apply additional customizations to the AMI
+that make sense for your company (e.g. vendor specific metrics and/or monitoring).
