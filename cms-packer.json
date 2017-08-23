@@ -84,6 +84,11 @@
       "destination" : "/tmp/cms_signal.conf"
     },
     {
+      "type" : "file",
+      "source" : "cerberus_components/additional_files/",
+      "destination" : "/tmp"
+    },
+    {
       "type" : "shell",
       "inline": [
         "wget {{user `cms_jar_url`}} -O /tmp/app-server.jar"
