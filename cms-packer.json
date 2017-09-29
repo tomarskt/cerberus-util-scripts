@@ -85,12 +85,12 @@
     },
     {
       "type" : "file",
-      "source" : "cerberus_components/additional_files/",
+      "source" : "additional_files/",
       "destination" : "/tmp/"
     },
     {
       "type" : "file",
-      "source" : "cerberus_components/additional_files/cms.jar",
+      "source" : "additional_files/cms.jar",
       "destination" : "/tmp/app-server.jar"
     },
     {
