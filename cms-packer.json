@@ -85,7 +85,7 @@
     },
     {
       "type" : "file",
-      "source" : "additional_files/",
+      "source" : "cerberus_components/additional_files/",
       "destination" : "/tmp/"
     },
     {
