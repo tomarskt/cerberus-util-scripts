@@ -86,13 +86,12 @@
     {
       "type" : "file",
       "source" : "cerberus_components/additional_files/",
-      "destination" : "/tmp"
+      "destination" : "/tmp/"
     },
     {
-      "type" : "shell",
-      "inline": [
-        "wget {{user `cms_jar_url`}} -O /tmp/app-server.jar"
-      ]
+      "type" : "file",
+      "source" : "cerberus_components/additional_files/cms.jar",
+      "destination" : "/tmp/app-server.jar"
     },
     {
       "type"  : "shell",
