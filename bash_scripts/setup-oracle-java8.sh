@@ -2,7 +2,7 @@
 
 # Download Oracle Java 8 accepting the license
 wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-http://download.oracle.com/otn-pub/java/jdk/8u152-b16/aa0333dd3019491ca4f6ddbe78cdb6d0/server-jre-8u152-linux-x64.tar.gz
+http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/server-jre-8u162-linux-x64.tar.gz
 
 if [ ! -f server-jre-*.tar.gz ]
 then 
