@@ -70,7 +70,7 @@ LOG_OUT=$LOG_DIR/client.out
 LOG_ERR=$LOG_DIR/client.err
 
 # Allow JVM to access hostname
-HOSTNAME=$(echo $HOSTNAME)
+export HOSTNAME=$(echo $HOSTNAME)
 
 # Start up the service and output the PID to the desired PID file location
 java -jar \
