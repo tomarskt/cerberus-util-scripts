@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-#^syntax detection
-
-forge "https://forgeapi.puppetlabs.com"
-
-mod 'nike/gateway',
-  :git => 'https://github.com/nike-inc/cerberus-gateway-puppet-module.git'

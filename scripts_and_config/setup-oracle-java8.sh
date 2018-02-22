@@ -13,7 +13,7 @@ fi
 # Extract the archive
 tar -xzvf server-jre-*.tar.gz
 # clean up the tar
-rm -fr server-jre-8u112-linux-x64.tar.gz
+rm -fr server-jre-*-linux-x64.tar.gz
 # mk the jvm dir
 sudo mkdir -p /usr/lib/jvm
 # move the server jre

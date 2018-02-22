@@ -1,0 +1,7 @@
+/var/log/cms/client.err /var/log/cms/client.out {
+    rotate 7
+    size 50M
+    missingok
+    copytruncate
+    compress
+}
