@@ -76,7 +76,7 @@ packer build \
 -var 'subnet_id=subnet-282d4670' \
 -var 'ami_name=cms' \
 -var 'ssh_username=ubuntu' \
-packer.json
+cms-packer.json
 ```
 
 ## Troubleshooting
