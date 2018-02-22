@@ -2,3 +2,5 @@
 /x509/
 /ec2_amazon-ebs.pem
 /cms.jar
+/ec2_cms.pem
+/additional_files/cms.jar
