@@ -63,7 +63,12 @@ CMS logs to `/var/log/cms/`.
 To create the images for the various Cerberus components please run the following commands from the root of this project.
 You will need the following params for each image.
 
-Download the version of CMS you want and place it in additional_files/
+Download the version of CMS you want and place it in `additional_files/`
+
+Here is a [script we use in our build system](https://gist.github.com/anonymous/2d2155fdcfc2d92ce84db354dae736ee), it requires `wget`, `jq`, and a `Java 8 JRE`
+
+You can optionally specify an env var `CMS_RELEASE_TARGET` and it will attempt to download that published version, if there is no version published matching `CMS_RELEASE_TARGET` it will attempt to checkout a branch or tag and compile it. 
+If you do not specify `CMS_RELEASE_TARGET` it will download the latest release.
 
 Parameter          | Notes
 -------------------|-------
