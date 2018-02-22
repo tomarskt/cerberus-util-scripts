@@ -60,8 +60,7 @@ CMS logs to `/var/log/cms/`.
 
 ### Bake the AMI
 
-To create the images for the various Cerberus components please run the following commands from the root of this project.
-You will need the following params for each image.
+#### 1. Download the CMS release 
 
 Download the version of CMS you want and place it in `additional_files/`
 
@@ -70,6 +69,12 @@ Here is a [script we use in our build system](https://gist.github.com/anonymous/
 You can optionally specify an env var `CMS_RELEASE_TARGET` and it will attempt to download that published version, if there is no version published matching `CMS_RELEASE_TARGET` it will attempt to checkout a branch or tag and compile it. 
 If you do not specify `CMS_RELEASE_TARGET` it will download the latest release.
 
+```bash
+wget https://github.com/Nike-Inc/cerberus-management-service/releases/download/v3.10.0/cms.jar -O additional_files/cms.jar
+```
+
+#### 2. Run packer to build the AMI
+
 Parameter          | Notes
 -------------------|-------
 source_ami         | The base AMI to use, currently it must be Unbuntu 14.04 based, if you dont have one you can use the base AMI for [Ubuntu 14.04 LTS us-west-2 ami-8f78c2f7base image supplied by caconical](https://cloud-images.ubuntu.com/locator/ec2/)
@@ -77,8 +82,6 @@ vpc_id             | The id of the VPC in which you will build your AMI in. If y
 subnet_id          | The subnet_id in which you will deploy the instance for packer to ssh into and build your AMI.
 
 ```bash
-wget https://github.com/Nike-Inc/cerberus-management-service/releases/download/v3.10.0/cms.jar -O additional_files/cms.jar
-
 packer build \
 -var 'source_ami=ami-8f78c2f7' \
 -var 'vpc_id=vpc-6e768f09' \
