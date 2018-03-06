@@ -62,6 +62,10 @@
     {
       "type": "shell",
       "script": "scripts_and_config/setup-cms.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts_and_config/do-customized-work.sh"
     }
   ]
 }
