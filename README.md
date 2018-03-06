@@ -44,8 +44,8 @@ Optionally specify an env var `CMS_RELEASE_TARGET` and the script will attempt t
 if there is no version published matching `CMS_RELEASE_TARGET` it will attempt to checkout a branch or tag and
 compile it.  If `CMS_RELEASE_TARGET` is not specified, it will download the latest release.
 
-Optionally override the `do-customized-work.sh` script do do anything custom
-for you ami during the bake process, such as configuring splunk, or new relic or any other service.
+Optionally override the `do-customized-work.sh` script to do anything custom
+for you ami during the bake process, such as configuring Splunk, or New Relic or any other service.
 
 ```bash
 wget https://github.com/Nike-Inc/cerberus-management-service/releases/download/v3.10.0/cms.jar -O additional_files/cms.jar
