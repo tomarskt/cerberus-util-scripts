@@ -1,6 +1,5 @@
 {
   "variables": {
-    "cms_jar_url": "{{env `CMS_JAR_URL`}}",
     "ssh_username": "{{env `USER`}}",
     "ami_description": "",
     "ami_name": "",
@@ -8,7 +7,6 @@
     "source_ami": null,
     "vpc_id": null,
     "subnet_id": null,
-    "tag_appversion": "{{env `CMS_JAR_URL`}}",
     "tag_creation_time": "{{timestamp}}",
     "tag_creator": "packer"
   },
@@ -27,7 +25,7 @@
     "tags" : {
       "appversion"   : "{{user `tag_appversion`}}",
       "base_ami"     : "{{user `source_ami`}}",
-      "cerberus_component" : "{{user `cerberus_component`}}",
+      "cerberus_component" : "cms",
       "creation_time": "{{user `tag_creation_time`}}",
       "creator"      : "{{user `tag_creator`}}"
     },
@@ -40,77 +38,34 @@
         "echo -n 'Waiting for cloud-init'",
         "while [ -n \"$(ps -A | grep cloud-init)\" ]",
         "  do echo -n . ; sleep 1; done",
-        "echo ' cloud-init finished.'",
-        "",
-        "sudo mkdir -p /opt/puppet/modules",
-        "sudo chown -R {{user `ssh_username`}}:{{user `ssh_username`}} /opt/puppet"
+        "echo ' cloud-init finished.'"
       ]
     },
     {
-      "type": "shell",
-      "script": "bash_scripts/packer-setup-script.sh"
-    },
-    {
-      "type": "shell",
-      "script": "bash_scripts/setup-oracle-java8.sh"
-    },
-    {
       "type"      : "file",
-      "source"    : "cerberus_components/cms/Puppetfile",
-      "destination": "/tmp/Puppetfile"
-    },{
-      "type"      : "file",
-      "source"    : "upstart/ec2_user_data.conf",
-      "destination": "/tmp/ec2_user_data.conf"
+      "source"    : "scripts_and_config/",
+      "destination": "/tmp"
     },
     {
       "type" : "file",
-      "source" : "bash_scripts/cms-init-script.sh",
-      "destination" : "/tmp/init-script.sh"
+      "source" : "additional_files/",
+      "destination" : "/tmp"
     },
     {
-      "type" : "file",
-      "source" : "bash_scripts/jvm-behavior-args.sh",
-      "destination" : "/tmp/jvm-behavior-args.sh"
+      "type": "shell",
+      "script": "scripts_and_config/misc-tools-setup-script.sh"
     },
     {
-      "type" : "file",
-      "source" : "bash_scripts/start-jar-script.sh",
-      "destination" : "/tmp/start-jar-script.sh"
+      "type": "shell",
+      "script": "scripts_and_config/setup-oracle-java8.sh"
     },
     {
-      "type" : "file",
-      "source" : "bash_scripts/cms_signal.conf",
-      "destination" : "/tmp/cms_signal.conf"
+      "type": "shell",
+      "script": "scripts_and_config/setup-cms.sh"
     },
     {
-      "type" : "file",
-      "source" : "cerberus_components/additional_files/",
-      "destination" : "/tmp/"
-    },
-    {
-      "type" : "file",
-      "source" : "additional_files/cms.jar",
-      "destination" : "/tmp/app-server.jar"
-    },
-    {
-      "type"  : "shell",
-      "inline": [
-        "sudo mkdir -p -m600 /opt/puppet/modules",
-        "sudo chown -R ubuntu:ubuntu /opt/puppet",
-        "sudo cp /tmp/Puppetfile /opt/puppet",
-        "cd /opt/puppet; sudo librarian-puppet install --verbose ",
-        "sudo chown -R ubuntu:ubuntu /opt/puppet",
-        "sudo cp /tmp/ec2_user_data.conf /etc/init/ec2_user_data.conf",
-        "sudo chown root:root /etc/init/ec2_user_data.conf",
-        "sudo chmod 0644 /etc/init/ec2_user_data.conf"
-      ]
-    },
-    {
-      "type"              : "puppet-masterless",
-      "manifest_file"     : "cerberus_components/cms",
-      "staging_directory" : "/tmp",
-      "execute_command"   : "{{.FacterVars}}{{if .Sudo}} sudo -E {{end}}puppet apply --verbose --detailed-exitcodes --modulepath='/opt/puppet/modules' {{.ManifestFile}}"
+      "type": "shell",
+      "script": "scripts_and_config/do-customized-work.sh"
     }
   ]
 }

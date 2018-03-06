@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-#^syntax detection
-
-forge "https://forgeapi.puppetlabs.com"
-
-mod 'nike/consul',
-  :git => 'https://github.com/nike-inc/cerberus-consul-puppet-module.git'
